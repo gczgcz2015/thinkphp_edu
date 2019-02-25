@@ -21,6 +21,5 @@
 // ];
 use think\Route;
 
-Route::get('test', function() {
-    return 'xxxx';
-});
+Route::get('/teacher', 'api/teacherController/index');
+// Route::get('/teacher', 'api/test/index');
