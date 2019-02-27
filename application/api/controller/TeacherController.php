@@ -2,18 +2,34 @@
 
 namespace app\api\controller;
 use think\Controller;
-use think\Db;
 use app\api\model\Teacher;
 use think\Request;
+use app\api\controller\ApiController;
+use think\Validate;
 
-class TeacherController extends Controller {
-    public function index(Request $request) {
-        // return Db::query('select * from think_user where id=?',[8]);
-        // return 'xxxx';
-        return $request->param();
-        $user = new Teacher;
-        $user->name= 'thinkphp';
-        $user->save();
-        return $user;
+class TeacherController extends ApiController {
+
+    public function info(Request $request)
+    {
+        $teacher = Teacher::get(['id' => $this->uid]);
+        return $teacher;
+    }
+    
+    public function editInfo(Request $request)
+    {
+        $validate = new Validate([
+            'avatar' => 'require',
+            'name' => 'require'
+        ]);
+
+        if(!$validate->check(input('')))
+        {
+            return self::returnMsg(200, $validate->getError());
+        }
+        $teacher = Teacher::get(['id' => $this->uid]);
+        $teacher->name = input('name');
+        $teacher->avatar = input('avatar');
+        $teacher->save();       
+        return $teacher;
     }
 }

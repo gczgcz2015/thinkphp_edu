@@ -21,5 +21,13 @@
 // ];
 use think\Route;
 
-Route::get('/teacher', 'api/teacherController/index');
-// Route::get('/teacher', 'api/test/index');
+Route::post('/code', 'api/LoginController/code');
+Route::post('/login', 'api/LoginController/login');
+Route::post('/register', 'api/LoginController/register');
+
+Route::put('/teacher', 'api/TeacherController/editInfo');
+Route::get('/teacher', 'api/TeacherController/info');
+Route::post('/organization', 'api/OrganizationController/create');
+Route::get('/organization', 'api/OrganizationController/info');
+
+
